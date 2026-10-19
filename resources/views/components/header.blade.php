@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<!-- Начало обертки для прижатия футера -->
+<div class="page-wrapper">
+
 <header class="top-header">
     <div class="header-container">
         <div class="logo">SCI-NEWS</div>
