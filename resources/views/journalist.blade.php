@@ -3,28 +3,38 @@
 <main class="main-container">
     <h2 class="section-title">Написать новую статью</h2>
 
-    <form class="news-form">
+    @if ($errors->any())
+        <div style="color: red; margin-bottom: 20px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form class="news-form" method="POST" action="/journalist">
+        @csrf
         <div class="form-group">
             <label>Заголовок:</label>
-            <input type="text" placeholder="Введите заголовок">
+            <input type="text" name="heading" value="{{ old('heading') }}">
         </div>
 
         <div class="form-group">
             <label>Категория:</label>
-            <select>
-                <option>Наука</option>
-                <option>Медицина</option>
-                <option>Космос</option>
-                <option>IT</option>
+            <select name="category_id">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group">
             <label>Текст статьи:</label>
-            <textarea rows="10" placeholder="Введите текст статьи"></textarea>
+            <textarea rows="10" name="text">{{ old('text') }}</textarea>
         </div>
 
-        <button type="button" class="btn-submit">Отправить</button>
+        <button type="submit" class="btn-submit">Отправить</button>
     </form>
 </main>
 

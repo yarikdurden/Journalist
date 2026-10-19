@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- Начало обертки для прижатия футера -->
 <div class="page-wrapper">
 
 <header class="top-header">
@@ -17,8 +16,20 @@
         <nav class="main-nav">
             <a href="/">Главная</a>
             <a href="/category">Категория</a>
-            <a href="/journalist">Журналист</a>
-            <a href="/admin">Админ</a>
+            
+            @auth
+                <a href="/journalist">Журналист</a>
+                <a href="/admin">Админ</a>
+                <form method="POST" action="/logout" style="display:inline; margin-left: 20px;">
+                    @csrf
+                    <button type="submit" style="background: none; border: none; color: #555; font-family: Arial, sans-serif; font-size: 14px; cursor: pointer; text-transform: uppercase; font-weight: bold;">
+                        Выйти ({{ auth()->user()->login }})
+                    </button>
+                </form>
+            @else
+                <a href="/login">Вход</a>
+                <a href="/register">Регистрация</a>
+            @endauth
         </nav>
     </div>
 </header>
